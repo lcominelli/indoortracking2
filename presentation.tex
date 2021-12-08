@@ -1,0 +1,128 @@
+%% Requires compilation with XeLaTeX or LuaLaTeX
+\documentclass[10pt,xcolor={table,dvipsnames},t]{beamer}
+\usetheme{}
+
+\title[Your Short Title]{Indoor Tracking App}
+\subtitle{GPS less tracking system}
+\author{Lionel Cominelli}
+\institute{Université de la Réunion / Master 1 informatique}
+\date{10/12/2021}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+%\begin{frame}{Outline}
+%  \tableofcontents
+%\end{frame}
+
+\section{Introduction}
+
+\begin{frame}{Plan}
+
+\begin{itemize}
+  \item {\Large Problematic}
+  \item {\Large The App solution}
+  \item {\Large Zoom on inertial principle}
+  \item {\Large The implementation}
+  \item {\Large Perspectives }
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{Problematic}
+
+{\large Since the 2001, US government has open the Global Positioning System (GPS) military tracking system to the world. \\ 
+- \\
+People take possession of the technology and intensively use it.\\ 
+- \\
+
+
+Today, we cannot imagine living without GPS ! \\ 
+- \\ 
+
+
+GPS works with satellites and outcomes your position by distance triangulation between you and the satellites. \\ 
+- \\
+
+But, what's happen inside a building ???? \\ 
+- \\
+
+GPS does not work.... to keep tracking indoor we must find another way.  }
+
+\end{frame}
+
+
+\begin{frame}{The App Solution}
+
+\begin{itemize}
+\item Use \texttt{tabular} for basic tables --- see Table~\ref{tab:widgets}, for example.
+\item You can upload a figure (JPEG, PNG or PDF) using the files menu. 
+\item To include it in your document, use the \texttt{includegraphics} command (see the comment below in the source code).
+\end{itemize}
+
+\begin{table}
+\centering
+\begin{tabular}{l r}
+\tableheadrow
+\tableheadcol{Item} & \tableheadcol{Quantity} \\
+Widgets & 42 \\
+Gadgets & 13
+\end{tabular}
+\caption{\label{tab:widgets}An example table.}
+\end{table}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Figure Example}
+
+Commands to include a figure:
+
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{chart}
+\caption{\label{fig:your-figure}Caption goes here.}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Text in Two Columns}
+
+\begin{columns}[T]
+
+\begin{column}{0.48\textwidth}
+\small
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet massa in dolor pellentesque tempor. Integer nunc. 
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item First bullet goes here
+  \begin{itemize}
+  \item Secondary bullet goes here
+    \begin{itemize}
+    \item Tertiary bullet goes here
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+\end{column}
+
+\end{columns}
+\end{frame}
+
+\normalframetitle
+
+\begin{frame}
+\frametitle{Lorem Ipsum}
+
+\includegraphics[width=.65\textwidth,height=.5\textheight]{photo}
+
+\end{frame}
+
+
+\end{document}
