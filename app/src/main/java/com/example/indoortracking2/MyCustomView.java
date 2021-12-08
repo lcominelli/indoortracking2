@@ -23,14 +23,19 @@ public class MyCustomView extends View {
     public int cheight = 0;
     public int cwidth = 0;
 
+    FootPrint rootFootPrint= null;
+    FootPrint lastFootPrint = null;
+
     public MyCustomView(Context context) {
         super(context);
     }
 
 
-    public MyCustomView(Context context, AttributeSet set) {
+    public MyCustomView(Context context,
+                        AttributeSet set) {
         super(context,set);
     }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -46,28 +51,44 @@ public class MyCustomView extends View {
 
 
         // continue OnDraw by drawing rectangles
-        canvas.drawRect(100,
-                100,
-                120,
-                80,
-                paint
-        );
+        //canvas.drawRect(100,
+        //        100,
+        //        120,
+        //        80,
+        //        paint);
+        FootPrint dummyfp = new FootPrint(100,
+                                         100,
+                                           120,
+                                            80,
+                                            null);
+        dummyfp.drawFootPrint(canvas,paint);
+
         // clear if asked
         if (clearCanva == true) {
             canvas.drawColor(Color.LTGRAY);
             clearCanva = false;
+            //  garbage the footPrint list
+            rootFootPrint = null;
         }
 
         // stop OnDraw here if foot prints draw false
         if (drawFootPrint == false) return;
 
         // continue OnDraw by drawing rectangles
-        canvas.drawRect(left,
+        FootPrint fp = new FootPrint(left,
                 top,
                 right,
                 bottom,
-                paint
-                );
+                lastFootPrint);
+        lastFootPrint = fp;
+        if (rootFootPrint == null) rootFootPrint = fp;
+        fp.drawFootPrint(canvas,paint);
+        //canvas.drawRect(left,
+        //        top,
+        //        right,
+        //        bottom,
+        //        paint
+        //        );
         drawFootPrint = false;
     }
 
