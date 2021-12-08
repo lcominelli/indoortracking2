@@ -78,6 +78,13 @@ public class MainActivity extends AppCompatActivity
         
     }
 
+    // forward the MainActivity touch event to the gesture detector
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.gestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
     public void refreshMovementDisplay(float[] xyzdist) {
        // textView.setText ("dx=" + xyzdist[0] +
          //       " dy=" + xyzdist[1]);
@@ -92,9 +99,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        //textView.setText("gx=" + sensorEvent.values[0] +
-        //        "gy=" + sensorEvent.values[1] );
-        // + "gz=" + sensorEvent.values[2]);
+        textView.setText("gx=" + sensorEvent.values[0] +
+                         "gy=" + sensorEvent.values[1] );
+                      //+ "gz=" + sensorEvent.values[2]);
     }
 
 
@@ -108,8 +115,9 @@ public class MainActivity extends AppCompatActivity
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
-            textView.setText("f gx=" + velocityX +
-                    velocityY            return true;
+            mainView.translateView((event2.getX() - event1.getX()),
+                                       (event2.getY() - event1.getY()));
+            return true;
         }
     }
 

@@ -48,7 +48,7 @@ public class FootPrint {
         if (nextFootPrint != null) nextFootPrint.refreshFootPathDrawing(canvas, paint);
     }
 
-    public void translateFootPath(float xoffset, float yoffset) {
+    public void translateFootPath(xoffset,yoffset) {
         this.xoffset = xoffset;
         this.yoffset = yoffset;
         if (nextFootPrint != null) nextFootPrint.translateFootPath(xoffset,yoffset);

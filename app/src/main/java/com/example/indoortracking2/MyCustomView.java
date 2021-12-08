@@ -12,8 +12,9 @@ import java.util.jar.Attributes;
 public class MyCustomView extends View {
 
     // onDraw commands
-    boolean drawFootPrint = false;
-    boolean clearCanva = false;
+    boolean drawNewFootPrint = false;
+    static boolean refreshFootPrints = false;
+    static boolean clearCanva = false;
 
     public float left;
     public float top;
@@ -23,7 +24,7 @@ public class MyCustomView extends View {
     public int cheight = 0;
     public int cwidth = 0;
 
-    FootPrint rootFootPrint= null;
+    static FootPrint rootFootPrint= null;
     FootPrint lastFootPrint = null;
 
     public MyCustomView(Context context) {
@@ -67,34 +68,38 @@ public class MyCustomView extends View {
         if (clearCanva == true) {
             canvas.drawColor(Color.LTGRAY);
             clearCanva = false;
-            //  garbage the footPrint list
-            rootFootPrint = null;
         }
 
         // stop OnDraw here if foot prints draw false
-        if (drawFootPrint == false) return;
+        if ((drawNewFootPrint == false) &&
+                (refreshFootPrints == false)) return;
 
         // continue OnDraw by drawing rectangles
-        FootPrint fp = new FootPrint(left,
-                top,
-                right,
-                bottom,
-                lastFootPrint);
-        lastFootPrint = fp;
-        if (rootFootPrint == null) rootFootPrint = fp;
-        fp.drawFootPrint(canvas,paint);
-        //canvas.drawRect(left,
+        if (drawNewFootPrint == true) {
+            FootPrint fp = new FootPrint(left,
+                    top,
+                    right,
+                    bottom,
+                    lastFootPrint);
+            lastFootPrint = fp;
+            if (rootFootPrint == null) rootFootPrint = fp;
+            fp.drawFootPrint(canvas, paint);
+            drawNewFootPrint = false;
+        } else if (refreshFootPrints == true) {
+            if (rootFootPrint != null) rootFootPrint.refreshFootPathDrawing(canvas, paint);
+            refreshFootPrints = false;
+        }
+            //canvas.drawRect(left,
         //        top,
         //        right,
         //        bottom,
         //        paint
         //        );
-        drawFootPrint = false;
     }
 
     public void resetView() {
 
-        drawFootPrint = true;
+        drawNewFootPrint = true;
         clearCanva = true;
         left = cwidth/2-10;
         top = cheight/2+10;
@@ -105,6 +110,13 @@ public class MyCustomView extends View {
 
     public void refreshView() {
         //resetView();
+        invalidate();
+    }
+
+    public void translateView(float xoffset, float yoffset) {
+        clearCanva = true;
+        refreshFootPrints = true;
+        if (rootFootPrint!=null) rootFootPrint.translateFootPath(xoffset,yoffset);
         invalidate();
     }
 
